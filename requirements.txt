@@ -1,0 +1,11 @@
+requests
+markdownify
+beautifulsoup4
+pypdf
+chromadb
+cohere
+python-dotenv
+langchain_text_splitters
+ipywidgets
+fastapi
+uvicorn

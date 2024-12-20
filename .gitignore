@@ -1,0 +1,8 @@
+venv/
+
+# Ignorar todas las carpetas __pycache__
+__pycache__/
+*.pyc
+
+# Ignorar el archivo .env
+.env

@@ -1,0 +1,5 @@
+# MODELOS DE PREGUNTAS
+
+# "question": "En Córdoba, ¿cuanta fué la superficie de terreno sembrada en 2017?"
+# "question": "¿Que puedes contarme sobre la producción automotriz en Córdoba?"
+# "question": "What can you tell me about automotive production in Córdoba?"
