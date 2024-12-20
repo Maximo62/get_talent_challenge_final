@@ -43,8 +43,6 @@ class RetrieveService:
                 n_results=top_k
             )
 
-            # print(results)
-
             # Imprimir los resultados para depuración
             logger.debug(f"Resultados de la consulta: {results}")
 
@@ -55,14 +53,22 @@ class RetrieveService:
 
             # Construir la lista de documentos relevantes
             documents = []
-            for i in range(len(results["ids"][0])): 
-                if i < len(results["documents"][0]):
-                    documents.append({
-                        "id": results["ids"][0][i],
-                        "text": results["documents"][0][i],
-                        "metadata": results.get("metadatas", [None])[i],
-                        "score": 1 - results["distances"][0][i] if self.similarity_metric == "cosine" else results["distances"][0][i],
-                    })
+            ids = results.get("ids", [])
+            documents_data = results.get("documents", [])
+            distances = results.get("distances", [])
+
+            # Asegurarse de que hay resultados para procesar
+            if len(ids) == 0 or len(documents_data) == 0:
+                logger.warning("No se encontraron documentos relevantes.")
+                return []
+
+            for i in range(min(len(ids[0]), len(documents_data[0]))): 
+                documents.append({
+                    "id": ids[0][i],
+                    "text": documents_data[0][i],
+                    "metadata": results.get("metadatas", [None])[i] if len(results.get("metadatas", [])) > i else None,
+                    "score": 1 - distances[0][i] if self.similarity_metric == "cosine" else distances[0][i],
+                })
 
             return documents
 

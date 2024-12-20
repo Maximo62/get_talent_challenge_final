@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 class QueryRequest(BaseModel):
-    question: str = Field(..., examples=["En Córdoba, ¿cuántos hectares de soja se sembraron en 2017?"])
+    question: str = Field(..., examples=["En Córdoba, ¿cuántos hectareas de soja se sembraron en 2017?"])
 
 class QueryResponse(BaseModel):
     answer: str = Field(..., examples=["En 2017, la superficie cultivada con soja en la provincia de Córdoba fue de 4,9 millones de hectáreas."])
@@ -55,7 +55,7 @@ async def query_rag(request: Request, query_request: QueryRequest):
         logger.debug(f"Environment variables: {variables}")
 
         # Recuperar documentos similares
-        results = retrieve_service.retrieve_similar_documents(question, variables["collection_name"], 1)
+        results = retrieve_service.retrieve_similar_documents(question, variables["collection_name"], 3)
         if not results:
             raise ValueError("No se encontraron documentos relevantes.")
 
